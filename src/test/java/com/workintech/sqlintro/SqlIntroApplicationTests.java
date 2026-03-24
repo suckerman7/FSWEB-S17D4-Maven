@@ -5,21 +5,19 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ExtendWith(ResultAnalyzer.class)
 class SqlIntroApplicationTests {
 
-	private OgrenciRepository ogrenciRepository;
-
-	@Autowired
-	public SqlIntroApplicationTests(OgrenciRepository ogrenciRepository) {
-		this.ogrenciRepository = ogrenciRepository;
-	}
+    @Autowired
+    private OgrenciRepository ogrenciRepository;
 
 	@DisplayName("Öğrenci tablosundaki tüm kayıtları listeleyin.")
 	@Test
